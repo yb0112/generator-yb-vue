@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+</head>
+<style>
+    #deUrl {
+        text-align: center;
+        margin-top: 202px;
+        font-weight: bold;
+        display: none
+    }
+</style>
+<body>
+    <div id="deUrl">您访问的页面不合法哦~</div>
+</body>
+<script>
+    let url = location.href.split('?')
+    let pars = url[1].split('&')
+    let data = {}
+    console.log(pars)
+    pars.forEach((n, i) => {
+        let p = n.split('=')
+        data[p[0]] = p[1]
+    })
+    if (!!data.app3Redirect) {
+        let indexUrl = window.location.href.split('bdmobilevue')[0];
+        let locaUrl = decodeURIComponent(data.app3Redirect);
+        if (locaUrl.indexOf(indexUrl) !== -1) {
+            self.location = decodeURIComponent(data.app3Redirect)
+        }else {
+            document.getElementById('deUrl').style.display = 'block';
+        }
+    }
+</script>
+
+</html>
